@@ -44,21 +44,21 @@ public class AdminController {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK!, Succesfull")
     })
-    @PostMapping("/auth/registerTeacher")
+    @PostMapping("/api/auth/registerTeacher")
     public ResponseEntity<User> addTeacher(@RequestBody RegisterCommandDTO command) {
         User result = RegisterTeacherCommandHandler.handle(command);
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 
     @ApiOperation(value = "Get Teacher by ID")
-    @GetMapping("/teachers/{userID}")
+    @GetMapping("/api/teachers/{userID}")
     public ResponseEntity<User> getTeacher(@PathVariable long userID) {
         User result = GetTeacherCommandHandler.handle(userID);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
     @ApiOperation(value = "Delete user")
-    @DeleteMapping("/users/{userID}")
+    @DeleteMapping("/api/users/{userID}")
 //    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> deleteUserByID(@PathVariable long userID) {
         adminService.deleteUser(userID);

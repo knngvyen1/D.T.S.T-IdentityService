@@ -33,7 +33,7 @@ public class UserController {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK!, Succesfull")
     })
-    @GetMapping("users/me")
+    @GetMapping("/api/users/me")
     public ResponseEntity<?> GetSelf() {
         String requestToken = SecurityContextHolder.getContext().getAuthentication().getCredentials().toString();
         Long userid = jwtService.getUserIdFromToken(requestToken);

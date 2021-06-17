@@ -43,20 +43,20 @@ public class AuthController {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK!, Succesfull")
     })
-    @PostMapping("/auth/register")
+    @PostMapping("/api/auth/register")
     public ResponseEntity<User> register(@RequestBody RegisterCommandDTO command) {
         User result = registerCommandHandler.handle(command);
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 
     @ApiOperation(value = "Login")
-    @PostMapping("/auth/login")
+    @PostMapping("/api/auth/login")
     public ResponseEntity<?> login(@RequestBody LoginCommandDTO command) {
         LoginCommandResult result = loginCommandHandler.handle(command);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
-    @PostMapping("/auth/refresh")
+    @PostMapping("/api/auth/refresh")
     public ResponseEntity<?> refresh(@RequestBody RefreshCommandDTO command) {
         RefreshCommandResult result = refreshCommandHandler.handle(command);
         return ResponseEntity.status(HttpStatus.OK).body(result);
