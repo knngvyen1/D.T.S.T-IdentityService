@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 @Setter
 @NoArgsConstructor
 @ToString
-@Table(name = "User")
+@Table(name = "Users", schema = "user_management")
 public class User implements UserDetails {
 
     @Id

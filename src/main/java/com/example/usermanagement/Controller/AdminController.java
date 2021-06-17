@@ -27,6 +27,11 @@ public class AdminController {
     private GetTeacherCommandHandler GetTeacherCommandHandler;
     private AdminService adminService;
 
+    @PostMapping("/api/users/health")
+    public String healthCheck() {
+        return "Healhy";
+    }
+
 
     @Autowired
     public AdminController(RegisterTeacherCommandHandler RegisterTeacherCommandHandler, GetTeacherCommandHandler GetTeacherCommandHandler, AdminService adminService) {
@@ -39,7 +44,6 @@ public class AdminController {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK!, Succesfull")
     })
-
     @PostMapping("/auth/registerTeacher")
     public ResponseEntity<User> addTeacher(@RequestBody RegisterCommandDTO command) {
         User result = RegisterTeacherCommandHandler.handle(command);

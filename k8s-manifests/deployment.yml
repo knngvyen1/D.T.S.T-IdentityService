@@ -1,0 +1,41 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: user-management
+  labels:
+    app: user-management
+spec:
+  selector:
+    matchLabels:
+      app: user-management
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+        maxSurge: 1
+        maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: user-management
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: user-management
+          image: eu.gcr.io/dtst-tool/user-management:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          livenessProbe:
+            httpGet:
+                path: /api/users/health
+                port: 80
+                scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 15
+          readinessProbe:
+            httpGet:
+                path: /api/users/health
+                port: 80
+                scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 15
